@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navbar from '../../client/src/components/Navbar';
+import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
 import Projects from './pages/Projects';
@@ -11,10 +11,10 @@ import Contact from './pages/Contact';
 function App() {
   return (
     <Router>
-      <div className="bg-gray-100 min-h-screen">
+      <div className="bg-slate-50 text-slate-800 font-sans min-h-screen">
         <Navbar />
         <main>
-          <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/blog" element={<Blog />} />

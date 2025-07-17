@@ -22,6 +22,8 @@ app.listen(port, () => {
 
 const postsRouter = require('./routes/posts');
 const projectsRouter = require('./routes/projects');
+const resumeRouter = require('./routes/resume');
 
-app.use('/posts', postsRouter);
-app.use('/projects', projectsRouter);
+app.use('/api/posts', postsRouter);
+app.use('/api/projects', projectsRouter);
+app.use('/api/resume', resumeRouter);

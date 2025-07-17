@@ -1,3 +1,4 @@
+// client/src/pages/Blog.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -17,22 +18,21 @@ function Blog() {
       });
   }, []);
 
-  if (loading) return <p>Loading posts...</p>;
+  if (loading) return <div className="text-center p-10">Loading...</div>;
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6">Blog</h1>
-      <div className="space-y-8">
+      <h1 className="text-4xl font-bold mb-8 text-slate-900">Blog</h1>
+      <div className="space-y-10">
         {posts.map(post => (
-          <div key={post._id} className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-2xl font-bold text-gray-800">{post.title}</h2>
-            <p className="text-sm text-gray-500 mb-4">By {post.author} on {new Date(post.date).toLocaleDateString()}</p>
-            <p className="text-gray-700 whitespace-pre-wrap">{post.content}</p>
-          </div>
+          <article key={post._id}>
+            <h2 className="text-2xl font-bold text-slate-800">{post.title}</h2>
+            <p className="text-sm text-slate-500 mt-1 mb-4">By {post.author} on {new Date(post.date).toLocaleDateString()}</p>
+            <div className="prose max-w-none text-slate-700 whitespace-pre-wrap">{post.content}</div>
+          </article>
         ))}
       </div>
     </div>
   );
 }
-
 export default Blog;
