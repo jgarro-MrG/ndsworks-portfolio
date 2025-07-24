@@ -10,10 +10,11 @@ function Navbar() {
       <nav className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <NavLink to="/" className="text-slate-900 font-bold text-lg">Jorge Garro</NavLink>
+            <NavLink to="/" className="text-slate-900 font-bold text-lg">NDSWorks</NavLink>
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
+              <NavLink to="/about" className={({ isActive }) => isActive ? activeLinkStyles : linkStyles}>About</NavLink>
               <NavLink to="/blog" className={({ isActive }) => isActive ? activeLinkStyles : linkStyles}>Blog</NavLink>
               <NavLink to="/projects" className={({ isActive }) => isActive ? activeLinkStyles : linkStyles}>Projects</NavLink>
               <NavLink to="/resume" className={({ isActive }) => isActive ? activeLinkStyles : linkStyles}>Resume</NavLink>

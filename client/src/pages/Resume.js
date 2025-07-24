@@ -1,24 +1,12 @@
 // client/src/pages/Resume.js
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import useFetchData from '../hooks/useFetchData';
 
 function Resume() {
-    const [resume, setResume] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        axios.get('http://localhost:5000/api/resume/')
-            .then(response => {
-                setResume(response.data);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.log("Error fetching resume data:", error);
-                setLoading(false);
-            });
-    }, []);
+    const { data: resume, loading, error } = useFetchData('/api/resume/');
 
     if (loading) return <div className="text-center p-10">Loading Resume...</div>;
+    if (error) return <div className="text-center p-10 text-red-500">{error}</div>;
     if (!resume) return <div className="text-center p-10">Could not load resume.</div>;
 
     return (

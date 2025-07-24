@@ -1,24 +1,13 @@
 // client/src/pages/Blog.js
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import useFetchData from '../hooks/useFetchData';
 
 function Blog() {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    axios.get('http://localhost:5000/api/posts/')
-      .then(response => {
-        setPosts(response.data);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.log("Error fetching blog posts:", error);
-        setLoading(false);
-      });
-  }, []);
+  const { data: posts, loading, error } = useFetchData('/api/posts/');
 
   if (loading) return <div className="text-center p-10">Loading...</div>;
+  if (error) return <div className="text-center p-10 text-red-500">{error}</div>;
+  if (!posts) return null;
 
   return (
     <div>
