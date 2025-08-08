@@ -12,7 +12,7 @@ import Contact from './pages/Contact';
 function App() {
   return (
     <Router>
-      <div className="text-slate-800 font-sans min-h-screen">
+      <div className="min-h-screen text-slate-800 font-sans">
         <Navbar />
         <main>
           <div className="max-w-4xl mx-auto my-12 p-8 sm:p-12 bg-white/60 backdrop-blur-md rounded-xl shadow-lg">

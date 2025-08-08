@@ -1,0 +1,3 @@
+{
+  "devCommand": "cd client && npm start"
+}
