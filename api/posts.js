@@ -1,4 +1,3 @@
-require('pg'); // Helper for Vercel's bundler
 const { Post } = require('../lib/models/post.model.js');
 
 // The exported function is the handler
@@ -21,4 +20,3 @@ module.exports = async function handler(request, response) {
     response.status(405).end(`Method ${request.method} Not Allowed`);
   }
 }
-

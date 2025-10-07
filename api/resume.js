@@ -1,4 +1,3 @@
-require('pg'); // Helper for Vercel's bundler
 const { Resume } = require('../lib/models/resume.model.js');
 const { Experience } = require('../lib/models/experience.model.js');
 const { Education } = require('../lib/models/education.model.js');

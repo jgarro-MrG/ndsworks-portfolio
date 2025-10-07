@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const GITHUB_USERNAME = 'jgarro-MrG';
 // Define the specific repositories you want to showcase.
 // The names must match your repository names on GitHub exactly.
