@@ -1,3 +1,5 @@
 {
-  "devCommand": "cd client && npm start"
+  "devCommand": "cd client && npm start",
+  "buildCommand": "npm install && npm run build",
+  "installCommand": "npm install"
 }
