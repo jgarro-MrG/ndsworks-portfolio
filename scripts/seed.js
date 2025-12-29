@@ -38,6 +38,19 @@ const resumeData = {
     ],
     experience: [
         {
+            company: "Self-Employed",
+            role: "Business Intelligence Developer and IT Ops",
+            period: "August 2025 – Present",
+            location: "Remote",
+            details: [
+                "Data Modernization: Orchestrated the migration of legacy spreadsheet workflows into a centralized PostgreSQL architecture, utilizing Claude and Gemini to automate data categorization and insight generation.",
+                "Custom Tooling: Engineered and deployed internal React applications on Vercel, successfully replacing multiple costly third-party platforms with high-performance, in-house solutions.",
+                "Communication & Marketing Automation: Built and managed advanced ManyChat and Email Marketing workflows, integrating them with core systems to automate lead engagement and customer journeys.",
+                "Infrastructure & IT Ops: Administered Google Workspace and Slack environments, optimizing security and internal communications through custom integrations and automated administrative tasks.",
+                "Process Efficiency: Transformed manual, fragmented reporting and administrative processes into a streamlined, automated engine, significantly reducing operational overhead and license costs."
+            ]
+        },
+        {
             company: "Jefferson Parish Public School System",
             role: "Career & Technical Education Instructor",
             period: "January 2020 – May 2025",
