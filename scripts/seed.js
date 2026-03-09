@@ -1,10 +1,16 @@
-require('dotenv').config();
+require('dotenv').config({ path: require('path').resolve(__dirname, '../.env.local') });
 const { sequelize } = require('../lib/db.js');
 const { Post } = require('../lib/models/post.model.js');
 const { Resume } = require('../lib/models/resume.model.js');
 const { Experience } = require('../lib/models/experience.model.js');
 const { Education } = require('../lib/models/education.model.js');
 const { Skill } = require('../lib/models/skill.model.js');
+const { ProjectConfig } = require('../lib/models/projectConfig.model.js');
+
+const projectConfigs = [
+  { repoName: 'ndsworks-portfolio', imageUrl: '/img/projects/ndsworks-portfolio.png', active: true, displayOrder: 0 },
+  { repoName: 'eloquent-javascript', imageUrl: '/img/projects/eloquent-javascript.png', active: true, displayOrder: 1 },
+];
 
 const posts = [
   {
@@ -24,36 +30,41 @@ const resumeData = {
     title: "Information Systems Engineer",
     summary: "Results-oriented Information Systems Engineer with a unique background combining over 8 years of hands-on technical support with 5 years of educational instruction. Proven expertise in diagnosing complex issues across Windows and Unix/Linux environments, managing relational databases, and mentoring in software development fundamentals. Seeking to leverage this diverse skill set to drive system reliability and user satisfaction in a challenging IT support, systems analysis, or infrastructure management role.",
     contact: {
-        email: "jorgegarro@protonmail.com",
-        linkedin: "linkedin.com/in/jorgegarro",
-        github: "jgarro2.github.io"
+        email: "jgarro@ndsworks.com",
+        phone: "+506 7256 1637",
+        location: "San José, Costa Rica (Open to Remote)",
+        linkedin: "https://www.linkedin.com/in/jorgegarro",
+        github: "https://github.com/jgarro-MrG"
     },
     skills: [
-        { category: "Operating Systems", details: "Windows Server, Linux (Red Hat, Ubuntu), UNIX (Solaris, AIX)" },
-        { category: "Databases", details: "MS SQL Server, Oracle, MySQL" },
-        { category: "Programming & Scripting", details: "Bash, Python, PowerShell, Java, C#, JavaScript, HTML5, CSS" },
-        { category: "Developer Tools", details: "Git, .NET Framework, Visual Studio" },
-        { category: "Virtualization", details: "VMware, VirtualBox" },
-        { category: "Methodologies", details: "Agile/SCRUM, ITIL, Incident Management, Root Cause Analysis (RCA)" }
+        { category: "Languages",                details: "TypeScript, JavaScript (ES6+), HTML5, CSS3, SQL, Python, Bash" },
+        { category: "Frameworks & Libraries",   details: "React 18, Next.js 14, Node.js, Express, Vite, Tailwind CSS, Sequelize ORM" },
+        { category: "Databases",                details: "PostgreSQL, MS SQL Server, Oracle, MySQL" },
+        { category: "APIs & Integrations",      details: "REST APIs, JWT Authentication, Google Drive API, Google Sheets API, Mailchimp, ManyChat" },
+        { category: "AI Tools",                 details: "Claude (Anthropic), Gemini (Google), ChatGPT (OpenAI), GitHub Copilot" },
+        { category: "Cloud & DevOps",           details: "Docker, AWS, Google Cloud Platform, Vercel, Git, GitHub, CI/CD, Vercel Serverless Functions" },
+        { category: "Systems & Infrastructure", details: "Windows Server, Linux (Red Hat, Ubuntu), UNIX (Solaris, AIX), VMware, VirtualBox" },
+        { category: "Methodologies",            details: "Agile/SCRUM, REST API Design, ETL Pipelines, ITIL, Root Cause Analysis (RCA)" },
     ],
     experience: [
         {
             company: "Self-Employed",
-            role: "Business Intelligence Developer and IT Ops",
-            period: "August 2025 – Present",
+            role: "Full-Stack Software Developer",
+            period: "August 2025 - Present",
             location: "Remote",
             details: [
-                "Data Modernization: Orchestrated the migration of legacy spreadsheet workflows into a centralized PostgreSQL architecture, utilizing Claude and Gemini to automate data categorization and insight generation.",
-                "Custom Tooling: Engineered and deployed internal React applications on Vercel, successfully replacing multiple costly third-party platforms with high-performance, in-house solutions.",
-                "Communication & Marketing Automation: Built and managed advanced ManyChat and Email Marketing workflows, integrating them with core systems to automate lead engagement and customer journeys.",
-                "Infrastructure & IT Ops: Administered Google Workspace and Slack environments, optimizing security and internal communications through custom integrations and automated administrative tasks.",
-                "Process Efficiency: Transformed manual, fragmented reporting and administrative processes into a streamlined, automated engine, significantly reducing operational overhead and license costs."
+                "Architected and deployed a production ecosystem of 7+ independent web applications for a Costa Rican immigration agency on Vercel + Neon PostgreSQL, using React 18, TypeScript, Next.js 14, Node.js, and Vercel Serverless Functions.",
+                "Engineered a full case management CRM with 18 case states, 5 agent roles, and 5 workflow types — built on Next.js App Router, PostgreSQL stored procedures, and a JWT-authenticated REST API handling the full visa application lifecycle.",
+                "Designed a shared PostgreSQL schema serving 7 micro-applications via a unified Neon database, including stored procedures, DB triggers, and automated ETL pipelines synchronizing 35,000+ client records from Google Sheets.",
+                "Integrated Google Drive API, Google Sheets API, and Mailchimp to automate document intake, payment processing, appointment scheduling, and email reminder workflows — all confirmed functional in production.",
+                "Replaced fragmented spreadsheet-based operations with purpose-built internal tools, eliminating dependency on third-party SaaS platforms and reducing manual overhead across intake, scheduling, and client communication pipelines.",
+                "Applied AI assistants (Claude, Gemini, ChatGPT) throughout the development lifecycle and beyond — used for code generation, debugging, architecture decisions, technical research, documentation, and self-directed learning across all projects."
             ]
         },
         {
             company: "Jefferson Parish Public School System",
             role: "Career & Technical Education Instructor",
-            period: "January 2020 – May 2025",
+            period: "January 2020 - May 2025",
             location: "Lousiana, United States",
             details: [
                 "Developed and delivered a comprehensive curriculum for Career and Technical Education (CTE), preparing high school students for careers in technology.",
@@ -65,7 +76,7 @@ const resumeData = {
         {
             company: "Tek-Experts",
             role: "Software Support Engineer, L2",
-            period: "July 2014 – December 2018",
+            period: "July 2014 - December 2018",
             location: "Cartago, Costa Rica",
             details: [
                 "Provided Tier 2 technical support for an enterprise Content Management and Information Governance software solution used by global organizations.",
@@ -78,7 +89,7 @@ const resumeData = {
         {
             company: "Experian",
             role: "System Analyst II",
-            period: "February 2014 – July 2014",
+            period: "February 2014 - July 2014",
             location: "Heredia, Costa Rica",
             details: [
                 "Monitored a real-time credit risk assessment platform, ensuring high availability and reliability for financial clients.",
@@ -90,7 +101,7 @@ const resumeData = {
         {
             company: "Hewlett-Packard",
             role: "Middleware Technical Support Engineer",
-            period: "April 2011 – July 2013",
+            period: "April 2011 - July 2013",
             location: "Heredia, Costa Rica",
             details: [
                 "Administered middleware and application hosting services for enterprise clients on WebLogic, WebSphere, and IIS platforms on Solaris, AIX, and Windows.",
@@ -101,7 +112,7 @@ const resumeData = {
         {
             company: "Hewlett-Packard",
             role: "Technical Support Specialist",
-            period: "May 2008 – April 2011",
+            period: "May 2008 - April 2011",
             location: "Heredia, Costa Rica",
             details: [
                 "Provided expert technical support for multi-function laser printing equipment, ensuring seamless installations and configurations.",
@@ -115,7 +126,7 @@ const resumeData = {
         {
             institution: "Universidad Latina de Costa Rica",
             degree: "Bachelor of Science in Information Systems Engineering",
-            period: "2010 – 2018",
+            period: "2010 - 2018",
             notes: "(Completed additional coursework in Electronics Engineering, 2005-2009)"
         }
     ]
@@ -181,6 +192,17 @@ const seedDatabase = async () => {
     await Education.bulkCreate(educationData, { transaction });
 
     console.log('✅ Resume with associated data seeded.');
+
+    // --- Seed ProjectConfig (non-destructive) ---
+    console.log('Seeding project configs (if they do not exist)...');
+    for (const cfg of projectConfigs) {
+      await ProjectConfig.findOrCreate({
+        where: { repoName: cfg.repoName },
+        defaults: cfg,
+        transaction,
+      });
+    }
+    console.log('Project configs seeded.');
 
     await transaction.commit();
     console.log('\nDatabase seeding completed successfully!');

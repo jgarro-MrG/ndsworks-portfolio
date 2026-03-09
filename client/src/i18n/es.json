@@ -1,0 +1,74 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "resume": "Currículum",
+    "projects": "Proyectos",
+    "blog": "Blog",
+    "architecture": "Arquitectura",
+    "contact": "Contacto"
+  },
+  "home": {
+    "subtitle": "Ingeniero en Sistemas de Información",
+    "tagline": "Un solucionador creativo de problemas apasionado por construir sistemas confiables y explorar la intersección de las artes, la tecnología y la filosofía.",
+    "viewWork": "Ver mi trabajo",
+    "viewResume": "Ver Currículum",
+    "quote": "\"No hay un lado oscuro de la luna, en realidad. De hecho, todo es oscuro.\"",
+    "quoteSource": "No Dark Side Works - Inspirado en un sentimiento del álbum The Dark Side of the Moon de Pink Floyd."
+  },
+  "about": {
+    "heading": "El Ingeniero, El Educador, El Arquitecto de lo que Viene",
+    "p1": "Para algunos, el camino profesional es una línea recta. Para Jorge Garro, ha sido un viaje de adaptación pragmática, impulsado por un profundo sentido de propósito. Desde los sistemas empresariales corporativos hasta el aula y de regreso a la ingeniería pura, su camino revela a un profesional que es en parte ingeniero, en parte educador y un verdadero solucionador de problemas de corazón, ahora listo para construir el próximo capítulo de su carrera en el desarrollo de software.",
+    "p2": "El viaje comenzó no con código, sino con sonido. Un sueño temprano de convertirse en ingeniero de sonido lo llevó a estudiar electrónica, atraído por el hardware y los circuitos detrás de la música. La vida y las exigencias profesionales requirieron un giro práctico. Influenciado por su padre, un analista de sistemas autodidacta, Jorge realizó la transición a Sistemas de Información, lanzando una exitosa carrera en TI corporativa donde apoyó sistemas complejos para grandes empresas.",
+    "p3": "En busca de un nuevo desafío que aprovechara su experiencia de una manera diferente, Jorge abrazó la oportunidad de adentrarse en el mundo de la educación. Como instructor de medios digitales y desarrollo de software, descubrió una pasión por la mentoría, traduciendo temas técnicos complejos en lecciones fundamentales para la próxima generación. Esta experiencia perfeccionó su capacidad de comunicarse con claridad y propósito, habilidades invaluables en cualquier equipo técnico.",
+    "p4": "A través de todas estas transiciones, una filosofía central ha sido su guía. \"Siempre me impulsa ayudar a otros, definir problemas y resolverlos\", explica. Este ethos de servicio está complementado por un poderoso principio técnico que extrae de su pasión como músico. \"Todo tiene una estructura\", dice. \"Hay patrones que cuando se usan correctamente, pueden crear cosas hermosas y sorprendentes... pero siempre es importante no añadir lo que no es necesario.\" Esta creencia en el diseño elegante y esencial es el sello de un verdadero ingeniero.",
+    "p5": "Hoy, Jorge se prepara para su próxima evolución. Con el objetivo de convertirse en desarrollador full-stack o ingeniero de datos, no está centrado en una sola pila tecnológica de moda. \"Quiero ser alguien que comprenda todo el sistema, de frente a atrás, de atrás a frente\", afirma. Su pasión reside en los complejos desafíos fundamentales del desarrollo back-end y la ingeniería de datos.",
+    "p6": "La historia de Jorge Garro no es solo sobre cambiar de trabajo; se trata de una navegación deliberada y decidida de una carrera multifacética. Es un testimonio de un profesional que aprende investigando, creando y enseñando, mientras construye un futuro mejor."
+  },
+  "contact": {
+    "heading": "Contáctame",
+    "body": "Siempre estoy abierto a discutir nuevos proyectos, ideas creativas u oportunidades para ser parte de una visión ambiciosa."
+  },
+  "blog": {
+    "heading": "Blog",
+    "byLine": "Por {{author}} el {{date}}"
+  },
+  "resume": {
+    "downloadPDF": "Descargar PDF",
+    "downloadATS": "Texto ATS",
+    "summary": "Resumen Profesional",
+    "skills": "Habilidades Técnicas",
+    "experience": "Experiencia Laboral",
+    "education": "Educación"
+  },
+  "ats": {
+    "heading": "Currículum ATS",
+    "download": "Descargar .txt",
+    "loading": "Cargando...",
+    "back": "Volver al Currículum"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "No se pudieron obtener los datos. Intente de nuevo más tarde."
+  },
+  "architecture": {
+    "heading": "Arquitectura del Sitio",
+    "intro": "Este sitio web es una aplicación full-stack construida con el stack PERN (PostgreSQL, Express, React, Node.js) y desplegada en la plataforma serverless de Vercel. Sigue el patrón de diseño Modelo-Vista-Controlador (MVC), e incluye un panel de administración completo con autenticación y un sistema de variantes de currículum. A continuación se describe cada capa:",
+    "frontend": {
+      "title": "1. Front-End (Vista)",
+      "body": "Una aplicación de página única (SPA) en React 18 con estilo Tailwind CSS, alojada en la red Edge global de Vercel. Incluye soporte bilingüe completo (ES/EN) mediante react-i18next, con páginas públicas de Currículum, Blog, Proyectos y Acerca de, y un panel de administración protegido para gestionar todo el contenido del sitio. La página del currículum permite descargar en vivo archivos PDF y texto plano ATS generados en el servidor."
+    },
+    "backend": {
+      "title": "2. Back-End (Controlador y Funciones Serverless)",
+      "body": "El back-end está construido con Node.js y Express, desplegado como Funciones Serverless en Vercel. Expone una API REST para todas las operaciones públicas y de administración. El endpoint del currículum utiliza pdfkit para generar archivos PDF optimizados para ATS bajo demanda. Un sistema de variantes de currículum permite crear configuraciones personalizadas por puesto: resúmenes alternativos, orden de categorías de habilidades y filtrado de experiencias, todo aplicado al momento de la generación sin duplicar contenido."
+    },
+    "database": {
+      "title": "3. Base de Datos (Modelo)",
+      "body": "Una base de datos Neon PostgreSQL, accedida mediante conexiones sin agrupación (non-pooling) optimizadas para entornos serverless. El ORM Sequelize gestiona siete tablas: Resumes, Experiences, Education, Skills, Posts, ProjectConfigs y ResumeVariants. Las columnas JSONB almacenan datos estructurados como información de contacto y configuración de variantes, junto con asociaciones relacionales estándar."
+    },
+    "admin": {
+      "title": "4. Panel de Administración y Autenticación",
+      "body": "Un panel de administración protegido en /admin gestiona todo el contenido del sitio. La autenticación usa tokens JWT: se emite un token firmado al iniciar sesión y se verifica del lado del servidor en cada solicitud de la API de administración. El panel incluye un Editor de Currículum (encabezado, experiencia, educación y habilidades con soporte bilingüe), un gestor de Variantes de Currículum para versiones dirigidas a puestos específicos, un gestor de Publicaciones y un gestor de Proyectos."
+    }
+  }
+}

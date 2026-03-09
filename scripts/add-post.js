@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: require('path').resolve(__dirname, '../.env.local') });
 const { sequelize } = require('../lib/db.js');
 const { Post } = require('../lib/models/post.model.js');
 

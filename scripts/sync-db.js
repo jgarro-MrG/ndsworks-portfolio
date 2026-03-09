@@ -1,5 +1,4 @@
-require('dotenv').config();
-require('dotenv').config();
+require('dotenv').config({ path: require('path').resolve(__dirname, '../.env.local') });
 const { sequelize } = require('../lib/db.js');
 
 // Import all models to ensure they are registered with Sequelize before syncing
@@ -8,6 +7,8 @@ const { Resume } = require('../lib/models/resume.model.js');
 const { Experience } = require('../lib/models/experience.model.js');
 const { Education } = require('../lib/models/education.model.js');
 const { Skill } = require('../lib/models/skill.model.js');
+require('../lib/models/projectConfig.model.js');
+require('../lib/models/resumeVariant.model.js');
 
 async function syncDatabase() {
   console.log('Starting database synchronization...');

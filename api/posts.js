@@ -1,22 +1,25 @@
 const { Post } = require('../lib/models/post.model.js');
 
-// The exported function is the handler
 module.exports = async function handler(request, response) {
-  // You can check the HTTP method to handle different request types
   if (request.method === 'GET') {
     try {
-      // Use findAll() to get all post entries, ordered by creation date descending
-      const posts = await Post.findAll({
-        order: [['createdAt', 'DESC']],
+      const lang = request.query.lang === 'es' ? 'es' : 'en';
+      const posts = await Post.findAll({ order: [['createdAt', 'DESC']] });
+      const result = posts.map(p => {
+        const d = p.toJSON();
+        if (lang === 'es') {
+          if (d.title_es) d.title = d.title_es;
+          if (d.content_es) d.content = d.content_es;
+        }
+        return d;
       });
-      response.status(200).json(posts);
+      response.status(200).json(result);
     } catch (error) {
       console.error('Error fetching posts:', error);
       response.status(500).json({ error: 'Failed to fetch posts' });
     }
   } else {
-    // If any other HTTP method is used, return a 405 Method Not Allowed error
     response.setHeader('Allow', ['GET']);
     response.status(405).end(`Method ${request.method} Not Allowed`);
   }
-}
+};

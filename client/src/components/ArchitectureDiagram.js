@@ -15,7 +15,8 @@ const ArchitectureDiagram = () => {
           </div>
           <div className="p-3 bg-white rounded-lg shadow-md border border-slate-200">
             <p className="font-bold">Vercel Edge</p>
-            <p className="text-slate-600">React UI</p>
+            <p className="text-slate-600">React 18 + i18n</p>
+            <p className="text-slate-400 text-xs">Public + Admin Panel</p>
           </div>
         </div>
 
@@ -40,7 +41,8 @@ const ArchitectureDiagram = () => {
           </div>
           <div className="p-3 bg-white rounded-lg shadow-md border border-slate-200">
             <p className="font-bold">Vercel Serverless</p>
-            <p className="text-slate-600">Express/Node.js API</p>
+            <p className="text-slate-600">Express API + JWT</p>
+            <p className="text-slate-400 text-xs">PDF Engine (pdfkit)</p>
           </div>
         </div>
 
@@ -64,8 +66,9 @@ const ArchitectureDiagram = () => {
             </svg>
           </div>
           <div className="p-3 bg-white rounded-lg shadow-md border border-slate-200">
-            <p className="font-bold">PostgreSQL DB</p>
+            <p className="font-bold">Neon PostgreSQL</p>
             <p className="text-slate-600">Sequelize ORM</p>
+            <p className="text-slate-400 text-xs">7 tables • JSONB</p>
           </div>
         </div>
 
