@@ -1,5 +1,5 @@
-const { verifyToken } = require('../../../lib/auth.js');
-const { ProjectConfig } = require('../../../lib/models/projectConfig.model.js');
+const { verifyToken } = require('../../lib/auth.js');
+const { ProjectConfig } = require('../../lib/models/projectConfig.model.js');
 
 module.exports = async function handler(req, res) {
   try {

@@ -2,10 +2,13 @@
   "devCommand": "cd client && npm start",
   "buildCommand": "npm run build",
   "functions": {
-    "api/**/*.js": {
+    "api/index.js": {
       "includeFiles": "node_modules/pg/**,node_modules/pdfkit/**",
       "memory": 1024,
       "maxDuration": 10
     }
-  }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index" }
+  ]
 }

@@ -1,8 +1,8 @@
-const { Resume } = require('../lib/models/resume.model.js');
-const { Experience } = require('../lib/models/experience.model.js');
-const { Education } = require('../lib/models/education.model.js');
-const { Skill } = require('../lib/models/skill.model.js');
-const { sortExperienceDesc } = require('../lib/sortExperience.js');
+const { Resume } = require('../../lib/models/resume.model.js');
+const { Experience } = require('../../lib/models/experience.model.js');
+const { Education } = require('../../lib/models/education.model.js');
+const { Skill } = require('../../lib/models/skill.model.js');
+const { sortExperienceDesc } = require('../../lib/sortExperience.js');
 
 module.exports = async function handler(request, response) {
   if (request.method === 'GET') {

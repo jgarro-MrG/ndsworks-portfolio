@@ -1,4 +1,4 @@
-const { ProjectConfig } = require('../lib/models/projectConfig.model.js');
+const { ProjectConfig } = require('../../lib/models/projectConfig.model.js');
 
 const GITHUB_USERNAME = 'jgarro-MrG';
 const DEFAULT_PROJECT_IMAGE = '/img/projects/pankaj-patel-_SgRNwAVNKw-unsplash.jpg';

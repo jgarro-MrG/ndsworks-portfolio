@@ -1,4 +1,4 @@
-const { Post } = require('../lib/models/post.model.js');
+const { Post } = require('../../lib/models/post.model.js');
 
 module.exports = async function handler(request, response) {
   if (request.method === 'GET') {

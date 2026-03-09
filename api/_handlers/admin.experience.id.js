@@ -1,5 +1,5 @@
-const { verifyToken } = require('../../../lib/auth.js');
-const { Experience } = require('../../../lib/models/experience.model.js');
+const { verifyToken } = require('../../lib/auth.js');
+const { Experience } = require('../../lib/models/experience.model.js');
 
 module.exports = async function handler(req, res) {
   try {
