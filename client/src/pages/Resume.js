@@ -5,7 +5,7 @@ import useFetchData from '../hooks/useFetchData';
 
 function Resume() {
   const { t, i18n } = useTranslation();
-  const lang = i18n.language === 'es' ? 'es' : undefined;
+  const lang = i18n.language?.startsWith('es') ? 'es' : undefined;
   const { data: resume, loading, error } = useFetchData('/api/resume/', lang);
 
   if (loading) return <div className="text-center p-10">{t('common.loading')}</div>;

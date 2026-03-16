@@ -4,7 +4,7 @@ import useFetchData from '../hooks/useFetchData';
 
 function Blog() {
   const { t, i18n } = useTranslation();
-  const lang = i18n.language === 'es' ? 'es' : undefined;
+  const lang = i18n.language?.startsWith('es') ? 'es' : undefined;
   const { data: posts, loading, error } = useFetchData('/api/posts/', lang);
 
   if (loading) return <div className="text-center p-10">{t('common.loading')}</div>;

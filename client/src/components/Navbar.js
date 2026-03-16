@@ -19,7 +19,7 @@ function Navbar() {
   const { t, i18n } = useTranslation();
 
   const toggleLang = () => {
-    const next = i18n.language === 'es' ? 'en' : 'es';
+    const next = i18n.language?.startsWith('es') ? 'en' : 'es';
     i18n.changeLanguage(next);
     localStorage.setItem('language', next);
   };
@@ -60,7 +60,7 @@ function Navbar() {
               onClick={toggleLang}
               className="hidden md:block px-3 py-1 text-xs font-semibold text-slate-600 hover:text-slate-900 border border-slate-300 rounded-full hover:bg-slate-100 transition-colors"
             >
-              {i18n.language === 'es' ? 'EN' : 'ES'}
+              {i18n.language?.startsWith('es') ? 'EN' : 'ES'}
             </button>
             <div className="-mr-2 flex md:hidden">
               <button
@@ -89,7 +89,7 @@ function Navbar() {
             onClick={() => { toggleLang(); setIsOpen(false); }}
             className={`block w-full text-left ${linkClasses}`}
           >
-            {i18n.language === 'es' ? 'EN — English' : 'ES — Español'}
+            {i18n.language?.startsWith('es') ? 'EN — English' : 'ES — Español'}
           </button>
         </div>
       </div>

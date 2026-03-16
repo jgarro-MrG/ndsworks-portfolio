@@ -11,7 +11,7 @@ function ResumeATS() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const langParam = lang === 'es' ? '?lang=es' : '';
+    const langParam = lang?.startsWith('es') ? '?lang=es' : '';
     setLoading(true);
     axios.get(`/api/resume/ats${langParam}`)
       .then(r => setText(r.data))
