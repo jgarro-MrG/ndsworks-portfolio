@@ -55,16 +55,15 @@ function buildPDF(doc, data) {
        .text(contactParts.join('  |  '), MARGIN, doc.y, { width: CONTENT_WIDTH, align: 'center' });
   }
 
-  // ── Section header helper ─────────────────────────────────────────────────
+  // ── Page-break helpers ────────────────────────────────────────────────────
   const PAGE_HEIGHT = 792; // US Letter
-  const MIN_SPACE_AFTER_HEADER = 40; // header + at least one line of content
+  function ensureSpace(needed) {
+    if (PAGE_HEIGHT - MARGIN - doc.y < needed) doc.addPage();
+  }
 
   function sectionHeader(title) {
     doc.moveDown(0.8);
-    const spaceLeft = PAGE_HEIGHT - MARGIN - doc.y;
-    if (spaceLeft < MIN_SPACE_AFTER_HEADER) {
-      doc.addPage();
-    }
+    ensureSpace(40); // header line + rule + at least one content line
     doc.font('Helvetica-Bold').fontSize(11).text(title, MARGIN, doc.y, { width: CONTENT_WIDTH });
     doc.moveTo(MARGIN, doc.y).lineTo(MARGIN + CONTENT_WIDTH, doc.y).lineWidth(0.5).stroke();
     doc.moveDown(0.3);
@@ -87,6 +86,7 @@ function buildPDF(doc, data) {
   // ── Professional Experience ───────────────────────────────────────────────
   sectionHeader('PROFESSIONAL EXPERIENCE');
   for (const job of (data.experience || [])) {
+    ensureSpace(60); // company title + role line + at least one bullet
     doc.font('Helvetica-Bold').fontSize(10).text(job.company, MARGIN, doc.y, { width: CONTENT_WIDTH });
     doc.font('Helvetica').fontSize(10)
        .text(`${job.role}  |  ${job.location}  |  ${job.period}`, MARGIN, doc.y, { width: CONTENT_WIDTH });
@@ -100,6 +100,7 @@ function buildPDF(doc, data) {
   // ── Education ─────────────────────────────────────────────────────────────
   sectionHeader('EDUCATION');
   for (const edu of (data.education || [])) {
+    ensureSpace(50); // institution title + degree line + optional notes
     doc.font('Helvetica-Bold').fontSize(10).text(edu.institution, MARGIN, doc.y, { width: CONTENT_WIDTH });
     doc.font('Helvetica').fontSize(10)
        .text(`${edu.degree}  |  ${edu.period}`, MARGIN, doc.y, { width: CONTENT_WIDTH });
