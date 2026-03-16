@@ -22,8 +22,8 @@ function Resume() {
           {t('resume.downloadATS')}
         </Link>
         <a
-          href="/api/resume/pdf"
-          download="Jorge_Garro_Resume.pdf"
+          href={lang ? `/api/resume/pdf?lang=${lang}` : '/api/resume/pdf'}
+          download={lang ? `Jorge_Garro_Resume_${lang}.pdf` : 'Jorge_Garro_Resume_en.pdf'}
           className="inline-flex items-center gap-2 px-4 py-2 bg-slate-800 text-white font-semibold rounded-lg shadow-md hover:bg-slate-700 transition-colors text-sm"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

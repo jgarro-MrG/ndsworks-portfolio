@@ -162,7 +162,7 @@ module.exports = async function handler(req, res) {
     });
 
     res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', 'attachment; filename="Jorge_Garro_Resume.pdf"');
+    res.setHeader('Content-Disposition', `attachment; filename="Jorge_Garro_Resume_${lang}.pdf"`);
     doc.pipe(res);
 
     buildPDF(doc, data);
