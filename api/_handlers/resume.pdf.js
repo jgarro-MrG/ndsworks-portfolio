@@ -56,8 +56,15 @@ function buildPDF(doc, data) {
   }
 
   // ── Section header helper ─────────────────────────────────────────────────
+  const PAGE_HEIGHT = 792; // US Letter
+  const MIN_SPACE_AFTER_HEADER = 40; // header + at least one line of content
+
   function sectionHeader(title) {
     doc.moveDown(0.8);
+    const spaceLeft = PAGE_HEIGHT - MARGIN - doc.y;
+    if (spaceLeft < MIN_SPACE_AFTER_HEADER) {
+      doc.addPage();
+    }
     doc.font('Helvetica-Bold').fontSize(11).text(title, MARGIN, doc.y, { width: CONTENT_WIDTH });
     doc.moveTo(MARGIN, doc.y).lineTo(MARGIN + CONTENT_WIDTH, doc.y).lineWidth(0.5).stroke();
     doc.moveDown(0.3);
