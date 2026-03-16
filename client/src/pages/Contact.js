@@ -9,8 +9,8 @@ function Contact() {
       <h1 className="text-3xl font-bold mb-6">{t('contact.heading')}</h1>
       <p className="text-lg text-slate-700">{t('contact.body')}</p>
       <div className="mt-6">
-        <a href="mailto:jgarro@ndsworks.com" className="text-xl text-blue-600 hover:underline">
-          jgarro@ndsworks.com
+        <a href="mailto:jgarro2@gmail.com" className="text-xl text-blue-600 hover:underline">
+          jgarro2@gmail.com
         </a>
       </div>
     </div>

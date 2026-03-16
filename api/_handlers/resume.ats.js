@@ -49,6 +49,13 @@ function formatATS(resume) {
   lines.push(resume.summary);
   lines.push('');
 
+  lines.push('TECHNICAL SKILLS');
+  lines.push('');
+  for (const skill of (resume.skills || [])) {
+    lines.push(`${skill.category}: ${skill.details}`);
+  }
+  lines.push('');
+
   lines.push('PROFESSIONAL EXPERIENCE');
   lines.push('');
   for (const job of (resume.experience || [])) {
@@ -67,12 +74,6 @@ function formatATS(resume) {
     lines.push(`${edu.degree} | ${normalizePeriod(edu.period)}`);
     if (edu.notes) lines.push(edu.notes);
     lines.push('');
-  }
-
-  lines.push('TECHNICAL SKILLS');
-  lines.push('');
-  for (const skill of (resume.skills || [])) {
-    lines.push(`${skill.category}: ${skill.details}`);
   }
 
   return lines.join('\n');

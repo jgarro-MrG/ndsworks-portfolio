@@ -30,7 +30,7 @@ const resumeData = {
     title: "Information Systems Engineer",
     summary: "Results-oriented Information Systems Engineer with a unique background combining over 8 years of hands-on technical support with 5 years of educational instruction. Proven expertise in diagnosing complex issues across Windows and Unix/Linux environments, managing relational databases, and mentoring in software development fundamentals. Seeking to leverage this diverse skill set to drive system reliability and user satisfaction in a challenging IT support, systems analysis, or infrastructure management role.",
     contact: {
-        email: "jgarro@ndsworks.com",
+        email: "jgarro2@gmail.com",
         phone: "+506 7256 1637",
         location: "San José, Costa Rica (Open to Remote)",
         linkedin: "https://www.linkedin.com/in/jorgegarro",

@@ -69,6 +69,14 @@ function buildPDF(doc, data) {
      .fontSize(10)
      .text(data.summary, MARGIN, doc.y, { width: CONTENT_WIDTH, align: 'left', lineGap: 1.5 });
 
+  // ── Technical Skills ──────────────────────────────────────────────────────
+  sectionHeader('TECHNICAL SKILLS');
+  for (const skill of (data.skills || [])) {
+    doc.font('Helvetica-Bold').fontSize(10)
+       .text(`${skill.category}: `, MARGIN, doc.y, { continued: true, width: CONTENT_WIDTH });
+    doc.font('Helvetica').fontSize(10).text(skill.details, { lineGap: 1 });
+  }
+
   // ── Professional Experience ───────────────────────────────────────────────
   sectionHeader('PROFESSIONAL EXPERIENCE');
   for (const job of (data.experience || [])) {
@@ -93,14 +101,6 @@ function buildPDF(doc, data) {
          .text(edu.notes, MARGIN, doc.y, { width: CONTENT_WIDTH });
     }
     doc.moveDown(0.5);
-  }
-
-  // ── Technical Skills ──────────────────────────────────────────────────────
-  sectionHeader('TECHNICAL SKILLS');
-  for (const skill of (data.skills || [])) {
-    doc.font('Helvetica-Bold').fontSize(10)
-       .text(`${skill.category}: `, MARGIN, doc.y, { continued: true, width: CONTENT_WIDTH });
-    doc.font('Helvetica').fontSize(10).text(skill.details, { lineGap: 1 });
   }
 }
 
