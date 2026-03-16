@@ -13,8 +13,8 @@ module.exports = async function handler(req, res) {
   if (!exp) return res.status(404).json({ error: 'Experience not found' });
 
   if (req.method === 'PUT') {
-    const { role, company, location, period, details, details_es } = req.body || {};
-    await exp.update({ role, company, location, period, details, details_es });
+    const { role, role_es, company, location, period, details, details_es } = req.body || {};
+    await exp.update({ role, role_es, company, location, period, details, details_es });
     return res.status(200).json(exp);
   }
 

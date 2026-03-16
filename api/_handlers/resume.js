@@ -23,6 +23,7 @@ module.exports = async function handler(request, response) {
           if (data.summary_es) data.summary = data.summary_es;
           data.experience = data.experience.map(e => ({
             ...e,
+            role: e.role_es || e.role,
             details: e.details_es || e.details,
           }));
           data.education = data.education.map(e => ({

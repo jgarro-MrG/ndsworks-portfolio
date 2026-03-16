@@ -50,6 +50,7 @@ const resumeData = {
         {
             company: "Self-Employed",
             role: "Full-Stack Software Developer",
+            role_es: "Desarrollador de Software Full-Stack",
             period: "August 2025 - Present",
             location: "Remote",
             details: [
@@ -59,11 +60,20 @@ const resumeData = {
                 "Integrated Google Drive API, Google Sheets API, and Mailchimp to automate document intake, payment processing, appointment scheduling, and email reminder workflows — all confirmed functional in production.",
                 "Replaced fragmented spreadsheet-based operations with purpose-built internal tools, eliminating dependency on third-party SaaS platforms and reducing manual overhead across intake, scheduling, and client communication pipelines.",
                 "Applied AI assistants (Claude, Gemini, ChatGPT) throughout the development lifecycle and beyond — used for code generation, debugging, architecture decisions, technical research, documentation, and self-directed learning across all projects."
+            ],
+            details_es: [
+                "Diseñó y desplegó un ecosistema de producción de más de 7 aplicaciones web independientes para una agencia de inmigración costarricense en Vercel + Neon PostgreSQL, usando React 18, TypeScript, Next.js 14, Node.js y Vercel Serverless Functions.",
+                "Desarrolló un CRM completo de gestión de casos con 18 estados, 5 roles de agentes y 5 tipos de flujo — construido sobre Next.js App Router, procedimientos almacenados en PostgreSQL y una API REST con autenticación JWT que maneja el ciclo completo de solicitudes de visa.",
+                "Diseñó un esquema PostgreSQL compartido que sirve a 7 micro-aplicaciones mediante una base de datos Neon unificada, incluyendo procedimientos almacenados, triggers de BD y pipelines ETL automatizados que sincronizan más de 35,000 registros de clientes desde Google Sheets.",
+                "Integró las APIs de Google Drive, Google Sheets y Mailchimp para automatizar la recepción de documentos, el procesamiento de pagos, la programación de citas y los flujos de recordatorios por correo — todos confirmados en producción.",
+                "Reemplazó operaciones fragmentadas basadas en hojas de cálculo con herramientas internas construidas a medida, eliminando la dependencia de plataformas SaaS de terceros y reduciendo el trabajo manual en los flujos de recepción, programación y comunicación con clientes.",
+                "Aplicó asistentes de IA (Claude, Gemini, ChatGPT) durante todo el ciclo de desarrollo: generación de código, depuración, decisiones de arquitectura, investigación técnica, documentación y aprendizaje autodidacta en todos los proyectos."
             ]
         },
         {
             company: "Jefferson Parish Public School System",
             role: "Career & Technical Education Instructor",
+            role_es: "Instructor de Educación Técnica y Profesional",
             period: "January 2020 - May 2025",
             location: "Lousiana, United States",
             details: [
@@ -71,11 +81,18 @@ const resumeData = {
                 "Guided over 150 students through project-based learning modules using Adobe Photoshop and Illustrator, culminating in the creation of professional-grade digital media portfolios.",
                 "In partnership with Operation Spark, taught fundamentals of software development, including logical problem-solving, programming constructs, and web technologies.",
                 "Mentored and coached a diverse student population, adapting teaching methods to meet various learning styles and fostering an engaging classroom environment."
+            ],
+            details_es: [
+                "Desarrolló y ejecutó un currículo integral de Educación Técnica y Profesional (CTE), preparando a estudiantes de secundaria para carreras en tecnología.",
+                "Guió a más de 150 estudiantes en módulos de aprendizaje basado en proyectos con Adobe Photoshop e Illustrator, culminando en la creación de portafolios profesionales de medios digitales.",
+                "En asociación con Operation Spark, enseñó fundamentos de desarrollo de software, incluyendo resolución lógica de problemas, constructos de programación y tecnologías web.",
+                "Orientó y apoyó a una población estudiantil diversa, adaptando métodos de enseñanza a distintos estilos de aprendizaje y fomentando un ambiente de clase participativo."
             ]
         },
         {
             company: "Tek-Experts",
             role: "Software Support Engineer, L2",
+            role_es: "Ingeniero de Soporte de Software, N2",
             period: "July 2014 - December 2018",
             location: "Cartago, Costa Rica",
             details: [
@@ -84,11 +101,19 @@ const resumeData = {
                 "Diagnosed and resolved issues across Windows Server administration, IT infrastructure, and network connectivity.",
                 "Provided development support to the implementation and integration .NET SDK and Web API.",
                 "Created and managed virtualized test environments for issue replication and solution validation."
+            ],
+            details_es: [
+                "Brindó soporte técnico de Nivel 2 para una solución empresarial de gestión de contenido y gobernanza de información utilizada por organizaciones globales.",
+                "Resolvió un promedio de más de 20 tickets semanales de Nivel 2 diagnosticando problemas complejos de bases de datos relacionales en entornos MS SQL y Oracle, asegurando la integridad de datos para una base de clientes global.",
+                "Diagnosticó y resolvió problemas en administración de Windows Server, infraestructura de TI y conectividad de red.",
+                "Brindó soporte de desarrollo para la implementación e integración del SDK .NET y Web API.",
+                "Creó y administró entornos de prueba virtualizados para la replicación de problemas y validación de soluciones."
             ]
         },
         {
             company: "Experian",
             role: "System Analyst II",
+            role_es: "Analista de Sistemas II",
             period: "February 2014 - July 2014",
             location: "Heredia, Costa Rica",
             details: [
@@ -96,22 +121,35 @@ const resumeData = {
                 "Orchestrated communication between customers and an engineering team during 24/7 incident management to ensure rapid issue resolution.",
                 "Authored detailed Root Cause Analysis (RCA) reports following service recovery to prevent future occurrences.",
                 "Collaborated with engineering to ensure reliable connections to credit bureaus and third-partydata sources."
+            ],
+            details_es: [
+                "Monitoreó una plataforma de evaluación de riesgo crediticio en tiempo real, garantizando alta disponibilidad y confiabilidad para clientes financieros.",
+                "Coordinó la comunicación entre clientes y el equipo de ingeniería durante la gestión de incidentes 24/7 para asegurar la resolución rápida de problemas.",
+                "Elaboró informes detallados de Análisis de Causa Raíz (RCA) tras la recuperación de servicios para prevenir futuros incidentes.",
+                "Colaboró con ingeniería para garantizar conexiones confiables con bureaux de crédito y fuentes de datos de terceros."
             ]
         },
         {
             company: "Hewlett-Packard",
             role: "Middleware Technical Support Engineer",
+            role_es: "Ingeniero de Soporte Técnico de Middleware",
             period: "April 2011 - July 2013",
             location: "Heredia, Costa Rica",
             details: [
                 "Administered middleware and application hosting services for enterprise clients on WebLogic, WebSphere, and IIS platforms on Solaris, AIX, and Windows.",
                 "Lead a support team of 15 agents, improving response times and resolution rates through mentorship and the implementation of Standardized Operating Procedures.",
                 "Developed and deployed Bash scripts to automate daily system health checks and filesystem housekeeping, reducing service tickets by 20%."
+            ],
+            details_es: [
+                "Administró servicios de middleware y alojamiento de aplicaciones para clientes empresariales en plataformas WebLogic, WebSphere e IIS sobre Solaris, AIX y Windows.",
+                "Lideró un equipo de soporte de 15 agentes, mejorando los tiempos de respuesta y las tasas de resolución mediante mentoría e implementación de Procedimientos Operativos Estándar.",
+                "Desarrolló y desplegó scripts Bash para automatizar verificaciones diarias del estado del sistema y mantenimiento del sistema de archivos, reduciendo los tickets de servicio en un 20%."
             ]
         },
         {
             company: "Hewlett-Packard",
             role: "Technical Support Specialist",
+            role_es: "Especialista en Soporte Técnico",
             period: "May 2008 - April 2011",
             location: "Heredia, Costa Rica",
             details: [
@@ -119,6 +157,12 @@ const resumeData = {
                 "Acted as a resource desk for agents, facilitating advanced troubleshooting and reducing escalations to Tier 2 support.",
                 "Developed a comprehensive technical knowledge system, enhancing team efficiency and consistency in handling recurring issues.",
                 "Contributed to the training of new agents, fostering a knowledgeable and capable support team"
+            ],
+            details_es: [
+                "Brindó soporte técnico especializado para equipos de impresión láser multifunción, asegurando instalaciones y configuraciones sin inconvenientes.",
+                "Funcionó como punto de consulta para agentes, facilitando la resolución avanzada de problemas y reduciendo las escalaciones al soporte de Nivel 2.",
+                "Desarrolló un sistema integral de conocimiento técnico, mejorando la eficiencia y consistencia del equipo en el manejo de problemas recurrentes.",
+                "Contribuyó a la capacitación de nuevos agentes, fomentando un equipo de soporte competente y bien preparado."
             ]
         }
     ],

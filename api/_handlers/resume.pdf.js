@@ -136,7 +136,7 @@ module.exports = async function handler(req, res) {
     if (lang === 'es') {
       if (data.title_es) data.title = data.title_es;
       if (data.summary_es) data.summary = data.summary_es;
-      data.experience = data.experience.map(e => ({ ...e, details: e.details_es || e.details }));
+      data.experience = data.experience.map(e => ({ ...e, role: e.role_es || e.role, details: e.details_es || e.details }));
       data.education  = data.education.map(e => ({ ...e, degree: e.degree_es || e.degree, notes: e.notes_es || e.notes }));
       data.skills     = data.skills.map(s => ({ ...s, details: s.details_es || s.details }));
     }

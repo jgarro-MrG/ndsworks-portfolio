@@ -12,8 +12,8 @@ module.exports = async function handler(req, res) {
   if (req.method === 'POST') {
     const resume = await Resume.findOne();
     if (!resume) return res.status(404).json({ error: 'Resume not found' });
-    const { role, company, location, period, details, details_es } = req.body || {};
-    const exp = await Experience.create({ role, company, location, period, details, details_es, resumeId: resume.id });
+    const { role, role_es, company, location, period, details, details_es } = req.body || {};
+    const exp = await Experience.create({ role, role_es, company, location, period, details, details_es, resumeId: resume.id });
     return res.status(201).json(exp);
   }
 

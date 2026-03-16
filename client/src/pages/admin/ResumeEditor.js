@@ -178,8 +178,13 @@ function ResumeEditor() {
         {expForms.map((exp, i) => (
           <div key={exp.id} className="bg-slate-800 p-4 rounded-lg mb-3 space-y-2">
             <div className="grid grid-cols-2 gap-2">
-              <input value={exp.role} onChange={e => { const a = [...expForms]; a[i] = { ...a[i], role: e.target.value }; setExpForms(a); }}
-                placeholder="Role" className="px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
+              {lang === 'en' ? (
+                <input value={exp.role} onChange={e => { const a = [...expForms]; a[i] = { ...a[i], role: e.target.value }; setExpForms(a); }}
+                  placeholder="Role (EN)" className="px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
+              ) : (
+                <input value={exp.role_es || ''} onChange={e => { const a = [...expForms]; a[i] = { ...a[i], role_es: e.target.value }; setExpForms(a); }}
+                  placeholder="Cargo (ES)" className="px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
+              )}
               <input value={exp.company} onChange={e => { const a = [...expForms]; a[i] = { ...a[i], company: e.target.value }; setExpForms(a); }}
                 placeholder="Company" className="px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
               <input value={exp.location} onChange={e => { const a = [...expForms]; a[i] = { ...a[i], location: e.target.value }; setExpForms(a); }}
