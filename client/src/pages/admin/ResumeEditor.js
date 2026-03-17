@@ -41,11 +41,15 @@ function ResumeEditor() {
       contact_phone: (d.contact || {}).phone || '',
       contact_location: (d.contact || {}).location || '',
     });
-    setExpForms((d.experience || []).map(e => ({
-      ...e,
-      details: (e.details || []).join('\n'),
-      details_es: (e.details_es || []).join('\n'),
-    })));
+    const parseStart = period => new Date((period || '').split(' - ')[0]);
+    setExpForms((d.experience || [])
+      .slice()
+      .sort((a, b) => parseStart(b.period) - parseStart(a.period))
+      .map(e => ({
+        ...e,
+        details: (e.details || []).join('\n'),
+        details_es: (e.details_es || []).join('\n'),
+      })));
     setEduForms(d.education || []);
     setSkillForms(d.skills || []);
   };
@@ -178,29 +182,42 @@ function ResumeEditor() {
         {expForms.map((exp, i) => (
           <div key={exp.id} className="bg-slate-800 p-4 rounded-lg mb-3 space-y-2">
             <div className="grid grid-cols-2 gap-2">
-              {lang === 'en' ? (
-                <input value={exp.role} onChange={e => { const a = [...expForms]; a[i] = { ...a[i], role: e.target.value }; setExpForms(a); }}
-                  placeholder="Role (EN)" className="px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
-              ) : (
-                <input value={exp.role_es || ''} onChange={e => { const a = [...expForms]; a[i] = { ...a[i], role_es: e.target.value }; setExpForms(a); }}
-                  placeholder="Cargo (ES)" className="px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
-              )}
-              <input value={exp.company} onChange={e => { const a = [...expForms]; a[i] = { ...a[i], company: e.target.value }; setExpForms(a); }}
-                placeholder="Company" className="px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
-              <input value={exp.location} onChange={e => { const a = [...expForms]; a[i] = { ...a[i], location: e.target.value }; setExpForms(a); }}
-                placeholder="Location" className="px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
-              <input value={exp.period} onChange={e => { const a = [...expForms]; a[i] = { ...a[i], period: e.target.value }; setExpForms(a); }}
-                placeholder="Period" className="px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
+              <div className="flex flex-col gap-1">
+                <span className="text-xs text-slate-400">{lang === 'en' ? 'Role' : 'Cargo'}</span>
+                {lang === 'en' ? (
+                  <input value={exp.role} onChange={e => { const a = [...expForms]; a[i] = { ...a[i], role: e.target.value }; setExpForms(a); }}
+                    className="px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
+                ) : (
+                  <input value={exp.role_es || ''} onChange={e => { const a = [...expForms]; a[i] = { ...a[i], role_es: e.target.value }; setExpForms(a); }}
+                    className="px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
+                )}
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-xs text-slate-400">Company</span>
+                <input value={exp.company} onChange={e => { const a = [...expForms]; a[i] = { ...a[i], company: e.target.value }; setExpForms(a); }}
+                  className="px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-xs text-slate-400">Location</span>
+                <input value={exp.location} onChange={e => { const a = [...expForms]; a[i] = { ...a[i], location: e.target.value }; setExpForms(a); }}
+                  className="px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-xs text-slate-400">Period</span>
+                <input value={exp.period} onChange={e => { const a = [...expForms]; a[i] = { ...a[i], period: e.target.value }; setExpForms(a); }}
+                  className="px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
+              </div>
             </div>
-            {lang === 'en' ? (
-              <textarea value={exp.details} onChange={e => { const a = [...expForms]; a[i] = { ...a[i], details: e.target.value }; setExpForms(a); }}
-                placeholder="Details — one bullet per line (EN)" rows={4}
-                className="w-full px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
-            ) : (
-              <textarea value={exp.details_es} onChange={e => { const a = [...expForms]; a[i] = { ...a[i], details_es: e.target.value }; setExpForms(a); }}
-                placeholder="Detalles — uno por línea (ES)" rows={4}
-                className="w-full px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
-            )}
+            <div className="flex flex-col gap-1">
+              <span className="text-xs text-slate-400">{lang === 'en' ? 'Details — one bullet per line' : 'Detalles — uno por línea'}</span>
+              {lang === 'en' ? (
+                <textarea value={exp.details} onChange={e => { const a = [...expForms]; a[i] = { ...a[i], details: e.target.value }; setExpForms(a); }}
+                  rows={4} className="w-full px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
+              ) : (
+                <textarea value={exp.details_es} onChange={e => { const a = [...expForms]; a[i] = { ...a[i], details_es: e.target.value }; setExpForms(a); }}
+                  rows={4} className="w-full px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
+              )}
+            </div>
             <div className="flex gap-2">
               <button onClick={() => saveExp(exp)} className="px-3 py-1 bg-slate-600 hover:bg-slate-500 rounded text-xs transition-colors">Save</button>
               <button onClick={() => deleteExp(exp.id)} className="px-3 py-1 bg-red-800 hover:bg-red-700 rounded text-xs transition-colors">Delete</button>
