@@ -14,9 +14,9 @@ module.exports = async function handler(req, res) {
   }
 
   if (req.method === 'POST') {
-    const { name, targetRole, customSummary, customSummary_es, config } = req.body || {};
+    const { name, targetRole, targetCompany, customSummary, customSummary_es, config } = req.body || {};
     if (!name) return res.status(400).json({ error: 'name is required' });
-    const variant = await ResumeVariant.create({ name, targetRole, customSummary, customSummary_es, config: config || {} });
+    const variant = await ResumeVariant.create({ name, targetRole, targetCompany, customSummary, customSummary_es, config: config || {} });
     return res.status(201).json(variant);
   }
 

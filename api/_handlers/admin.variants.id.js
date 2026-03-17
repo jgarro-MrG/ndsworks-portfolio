@@ -17,8 +17,8 @@ module.exports = async function handler(req, res) {
   }
 
   if (req.method === 'PUT') {
-    const { name, targetRole, customSummary, customSummary_es, config } = req.body || {};
-    await variant.update({ name, targetRole, customSummary, customSummary_es, config });
+    const { name, targetRole, targetCompany, customSummary, customSummary_es, config } = req.body || {};
+    await variant.update({ name, targetRole, targetCompany, customSummary, customSummary_es, config });
     return res.status(200).json(variant);
   }
 

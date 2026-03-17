@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import ReactMarkdown from 'react-markdown';
 import useFetchData from '../hooks/useFetchData';
 
 function Blog() {
@@ -21,7 +22,9 @@ function Blog() {
             <p className="text-sm text-slate-500 mt-1 mb-4">
               {t('blog.byLine', { author: post.author, date: new Date(post.createdAt).toLocaleString() })}
             </p>
-            <div className="prose max-w-none text-slate-700 whitespace-pre-wrap">{post.content}</div>
+            <div className="prose max-w-none text-slate-700">
+              <ReactMarkdown>{post.content}</ReactMarkdown>
+            </div>
           </article>
         ))}
       </div>

@@ -16,14 +16,17 @@ const SKILL_CATEGORIES = [
 const emptyForm = {
   name: '',
   targetRole: '',
+  targetCompany: '',
   customSummary: '',
   customSummary_es: '',
   skillCategoryOrder: [...SKILL_CATEGORIES],
   hiddenExperienceIds: [],
+  jobDescription: '',
 };
 
 function VariantForm({ initial, experience, onSave, onCancel }) {
   const [form, setForm] = useState(initial);
+  const [generating, setGenerating] = useState(false);
 
   const moveCategory = (index, dir) => {
     const order = [...form.skillCategoryOrder];
@@ -42,10 +45,27 @@ function VariantForm({ initial, experience, onSave, onCancel }) {
     });
   };
 
+  const handleGenerate = async () => {
+    if (!form.jobDescription?.trim()) return;
+    setGenerating(true);
+    try {
+      const res = await axios.post('/api/admin/ai/generate-variant', { jobDescription: form.jobDescription });
+      setForm(f => ({
+        ...f,
+        customSummary: res.data.customSummary,
+        customSummary_es: res.data.customSummary_es,
+        skillCategoryOrder: res.data.skillCategoryOrder,
+      }));
+    } finally {
+      setGenerating(false);
+    }
+  };
+
   const handleSave = () => {
     onSave({
       name: form.name,
       targetRole: form.targetRole,
+      targetCompany: form.targetCompany,
       customSummary: form.customSummary,
       customSummary_es: form.customSummary_es,
       config: {
@@ -72,6 +92,12 @@ function VariantForm({ initial, experience, onSave, onCancel }) {
           placeholder="Target role (e.g. Senior Full-Stack Developer)"
           className={inputClass}
         />
+        <input
+          value={form.targetCompany}
+          onChange={e => setForm(f => ({ ...f, targetCompany: e.target.value }))}
+          placeholder="Target company (e.g. Synnex)"
+          className={inputClass}
+        />
       </div>
       <textarea
         value={form.customSummary}
@@ -87,6 +113,25 @@ function VariantForm({ initial, experience, onSave, onCancel }) {
         rows={3}
         className={inputClass}
       />
+
+      <div className="border border-slate-700 rounded-lg p-4 space-y-3">
+        <p className="text-sm font-medium text-slate-300">AI Generate</p>
+        <textarea
+          value={form.jobDescription}
+          onChange={e => setForm(f => ({ ...f, jobDescription: e.target.value }))}
+          placeholder="Paste job description / posting here..."
+          rows={5}
+          className={inputClass}
+        />
+        <button
+          type="button"
+          onClick={handleGenerate}
+          disabled={generating || !form.jobDescription?.trim()}
+          className="px-4 py-2 bg-slate-600 hover:bg-slate-500 disabled:opacity-40 rounded text-sm font-medium transition-colors"
+        >
+          {generating ? 'Generating...' : 'Generate with AI'}
+        </button>
+      </div>
 
       <div>
         <p className="text-sm text-slate-400 mb-2">Skill category order (drag to reorder via up/down)</p>
@@ -187,10 +232,12 @@ function ResumeVariants() {
   const initialFormFromVariant = (v) => ({
     name: v.name,
     targetRole: v.targetRole || '',
+    targetCompany: v.targetCompany || '',
     customSummary: v.customSummary || '',
     customSummary_es: v.customSummary_es || '',
     skillCategoryOrder: v.config?.skillCategoryOrder?.length ? v.config.skillCategoryOrder : [...SKILL_CATEGORIES],
     hiddenExperienceIds: v.config?.hiddenExperienceIds || [],
+    jobDescription: '',
   });
 
   if (loading) return <AdminLayout><p className="text-slate-400">Loading...</p></AdminLayout>;
@@ -241,7 +288,11 @@ function ResumeVariants() {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="font-semibold">{v.name}</p>
-                {v.targetRole && <p className="text-sm text-slate-400">{v.targetRole}</p>}
+                {(v.targetRole || v.targetCompany) && (
+                  <p className="text-sm text-slate-400">
+                    {[v.targetRole, v.targetCompany].filter(Boolean).join(' @ ')}
+                  </p>
+                )}
                 {v.config?.skillCategoryOrder?.length > 0 && (
                   <p className="text-xs text-slate-500 mt-1">
                     Skills: {v.config.skillCategoryOrder.join(' → ')}

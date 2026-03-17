@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import ReactMarkdown from 'react-markdown';
 import AdminLayout from '../../components/admin/AdminLayout';
 
 function PostEditor() {
@@ -8,6 +9,7 @@ function PostEditor() {
   const isNew = !id;
   const navigate = useNavigate();
   const [lang, setLang] = useState('en');
+  const [previewMode, setPreviewMode] = useState(false);
   const [form, setForm] = useState({ title: '', content: '', title_es: '', content_es: '' });
 
   useEffect(() => {
@@ -63,14 +65,38 @@ function PostEditor() {
                 required
                 className="w-full px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:border-slate-500"
               />
-              <textarea
-                value={form.content}
-                onChange={e => setForm({ ...form, content: e.target.value })}
-                placeholder="Content (EN)"
-                required
-                rows={12}
-                className="w-full px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:border-slate-500"
-              />
+              <div>
+                <div className="flex gap-1 mb-1">
+                  {['Write', 'Preview'].map(mode => (
+                    <button
+                      key={mode}
+                      type="button"
+                      onClick={() => setPreviewMode(mode === 'Preview')}
+                      className={`px-3 py-1 rounded text-xs font-medium transition-colors ${
+                        (previewMode ? 'Preview' : 'Write') === mode
+                          ? 'bg-slate-600 text-white'
+                          : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                      }`}
+                    >
+                      {mode}
+                    </button>
+                  ))}
+                </div>
+                {previewMode ? (
+                  <div className="prose prose-invert max-w-none min-h-48 px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-sm">
+                    <ReactMarkdown>{form.content}</ReactMarkdown>
+                  </div>
+                ) : (
+                  <textarea
+                    value={form.content}
+                    onChange={e => setForm({ ...form, content: e.target.value })}
+                    placeholder="Content (EN) — markdown supported"
+                    required
+                    rows={12}
+                    className="w-full px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:border-slate-500"
+                  />
+                )}
+              </div>
             </>
           ) : (
             <>
@@ -80,13 +106,37 @@ function PostEditor() {
                 placeholder="Título (ES)"
                 className="w-full px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:border-slate-500"
               />
-              <textarea
-                value={form.content_es}
-                onChange={e => setForm({ ...form, content_es: e.target.value })}
-                placeholder="Contenido (ES)"
-                rows={12}
-                className="w-full px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:border-slate-500"
-              />
+              <div>
+                <div className="flex gap-1 mb-1">
+                  {['Write', 'Preview'].map(mode => (
+                    <button
+                      key={mode}
+                      type="button"
+                      onClick={() => setPreviewMode(mode === 'Preview')}
+                      className={`px-3 py-1 rounded text-xs font-medium transition-colors ${
+                        (previewMode ? 'Preview' : 'Write') === mode
+                          ? 'bg-slate-600 text-white'
+                          : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                      }`}
+                    >
+                      {mode}
+                    </button>
+                  ))}
+                </div>
+                {previewMode ? (
+                  <div className="prose prose-invert max-w-none min-h-48 px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-sm">
+                    <ReactMarkdown>{form.content_es}</ReactMarkdown>
+                  </div>
+                ) : (
+                  <textarea
+                    value={form.content_es}
+                    onChange={e => setForm({ ...form, content_es: e.target.value })}
+                    placeholder="Contenido (ES) — markdown admitido"
+                    rows={12}
+                    className="w-full px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:border-slate-500"
+                  />
+                )}
+              </div>
             </>
           )}
           <div className="flex gap-3">

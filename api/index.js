@@ -26,6 +26,7 @@ const adminSkillsHandler       = require('./_handlers/admin.skills.js');
 const adminSkillByIdHandler    = require('./_handlers/admin.skills.id.js');
 const adminVariantsHandler     = require('./_handlers/admin.variants.js');
 const adminVariantByIdHandler  = require('./_handlers/admin.variants.id.js');
+const adminAiGenerateVariantHandler = require('./_handlers/admin.ai.generate-variant.js');
 
 const app = express();
 app.use(express.json());
@@ -90,5 +91,8 @@ app.post('/api/admin/variants',        wrap(adminVariantsHandler));
 app.get('/api/admin/variants/:id',     withId(adminVariantByIdHandler));
 app.put('/api/admin/variants/:id',     withId(adminVariantByIdHandler));
 app.delete('/api/admin/variants/:id',  withId(adminVariantByIdHandler));
+
+// Admin AI
+app.post('/api/admin/ai/generate-variant', wrap(adminAiGenerateVariantHandler));
 
 module.exports = app;
