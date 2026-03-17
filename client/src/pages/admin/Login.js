@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 function Login() {
@@ -23,6 +23,7 @@ function Login() {
     <div className="min-h-screen bg-slate-900 flex items-center justify-center">
       <div className="bg-slate-800 p-8 rounded-xl shadow-lg w-full max-w-sm">
         <h1 className="text-2xl font-bold text-white mb-6 text-center">Admin Login</h1>
+        <Link to="/" className="block text-center text-xs text-slate-500 hover:text-slate-300 transition-colors -mt-4 mb-6">← ndsworks.com</Link>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="password"

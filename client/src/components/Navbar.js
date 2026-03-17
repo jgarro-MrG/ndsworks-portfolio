@@ -62,6 +62,12 @@ function Navbar() {
             >
               {i18n.language?.startsWith('es') ? 'EN' : 'ES'}
             </button>
+            <NavLink
+              to="/admin"
+              className="hidden md:block px-2 py-1 text-xs text-slate-400 hover:text-slate-600 transition-colors"
+            >
+              ⚙
+            </NavLink>
             <div className="-mr-2 flex md:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
