@@ -13,8 +13,8 @@ module.exports = async function handler(req, res) {
   if (!skill) return res.status(404).json({ error: 'Skill not found' });
 
   if (req.method === 'PUT') {
-    const { category, details, details_es } = req.body || {};
-    await skill.update({ category, details, details_es });
+    const { category, category_es, details, details_es } = req.body || {};
+    await skill.update({ category, category_es, details, details_es });
     return res.status(200).json(skill);
   }
 

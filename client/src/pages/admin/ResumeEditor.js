@@ -267,8 +267,13 @@ function ResumeEditor() {
         <LangTabs lang={lang} setLang={setLang} />
         {skillForms.map((skill, i) => (
           <div key={skill.id} className="bg-slate-800 p-4 rounded-lg mb-2 flex gap-2 items-center">
-            <input value={skill.category} onChange={e => { const a = [...skillForms]; a[i] = { ...a[i], category: e.target.value }; setSkillForms(a); }}
-              placeholder="Category" className="w-1/4 px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
+            {lang === 'en' ? (
+              <input value={skill.category} onChange={e => { const a = [...skillForms]; a[i] = { ...a[i], category: e.target.value }; setSkillForms(a); }}
+                placeholder="Category (EN)" className="w-1/4 px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
+            ) : (
+              <input value={skill.category_es || ''} onChange={e => { const a = [...skillForms]; a[i] = { ...a[i], category_es: e.target.value }; setSkillForms(a); }}
+                placeholder="Categoría (ES)" className="w-1/4 px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
+            )}
             {lang === 'en' ? (
               <input value={skill.details} onChange={e => { const a = [...skillForms]; a[i] = { ...a[i], details: e.target.value }; setSkillForms(a); }}
                 placeholder="Details (EN)" className="flex-1 px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
