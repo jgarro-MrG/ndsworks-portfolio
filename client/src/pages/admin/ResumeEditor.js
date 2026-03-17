@@ -51,7 +51,7 @@ function ResumeEditor() {
         details_es: (e.details_es || []).join('\n'),
       })));
     setEduForms(d.education || []);
-    setSkillForms(d.skills || []);
+    setSkillForms((d.skills || []).slice().sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0)));
   };
 
   useEffect(() => { load(); }, []);
@@ -97,6 +97,24 @@ function ResumeEditor() {
   const saveSkill = async (skill) => {
     await axios.put(`/api/admin/skills/${skill.id}`, skill);
     alert('Skill saved.');
+  };
+
+  const moveSkill = (index, dir) => {
+    const next = index + dir;
+    if (next < 0 || next >= skillForms.length) return;
+    const a = [...skillForms];
+    [a[index], a[next]] = [a[next], a[index]];
+    setSkillForms(a);
+  };
+
+  const saveSkillOrder = async () => {
+    await Promise.all(
+      skillForms.map((skill, i) =>
+        axios.put(`/api/admin/skills/${skill.id}`, { ...skill, sortOrder: i + 1 })
+      )
+    );
+    setSkillForms(f => f.map((s, i) => ({ ...s, sortOrder: i + 1 })));
+    alert('Order saved.');
   };
 
   const deleteSkill = async (id) => {
@@ -263,7 +281,12 @@ function ResumeEditor() {
 
       {/* Skills */}
       <section className="mb-10">
-        <h2 className="text-lg font-semibold mb-4 text-slate-300">Skills</h2>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-slate-300">Skills</h2>
+          <button onClick={saveSkillOrder} className="px-3 py-1 bg-slate-600 hover:bg-slate-500 rounded text-xs transition-colors">
+            Save Order
+          </button>
+        </div>
         <LangTabs lang={lang} setLang={setLang} />
         {skillForms.map((skill, i) => (
           <div key={skill.id} className="bg-slate-800 p-4 rounded-lg mb-2 flex gap-2 items-center">
@@ -281,6 +304,10 @@ function ResumeEditor() {
               <input value={skill.details_es || ''} onChange={e => { const a = [...skillForms]; a[i] = { ...a[i], details_es: e.target.value }; setSkillForms(a); }}
                 placeholder="Detalles (ES)" className="flex-1 px-3 py-1.5 rounded bg-slate-700 border border-slate-600 text-sm focus:outline-none" />
             )}
+            <div className="flex flex-col gap-0.5 shrink-0">
+              <button onClick={() => moveSkill(i, -1)} disabled={i === 0} className="text-slate-400 hover:text-white disabled:opacity-20 text-xs leading-none px-1">▲</button>
+              <button onClick={() => moveSkill(i, 1)} disabled={i === skillForms.length - 1} className="text-slate-400 hover:text-white disabled:opacity-20 text-xs leading-none px-1">▼</button>
+            </div>
             <button onClick={() => saveSkill(skill)} className="px-3 py-1 bg-slate-600 hover:bg-slate-500 rounded text-xs transition-colors shrink-0">Save</button>
             <button onClick={() => deleteSkill(skill.id)} className="px-3 py-1 bg-red-800 hover:bg-red-700 rounded text-xs transition-colors shrink-0">Delete</button>
           </div>
