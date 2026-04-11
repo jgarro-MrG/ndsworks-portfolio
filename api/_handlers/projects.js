@@ -2,7 +2,7 @@ const { ProjectConfig } = require('../../lib/models/projectConfig.model.js');
 
 const GITHUB_USERNAME = 'jgarro-MrG';
 const DEFAULT_PROJECT_IMAGE = '/img/projects/pankaj-patel-_SgRNwAVNKw-unsplash.jpg';
-const GITHUB_API_URL = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&direction=desc`;
+const GITHUB_API_URL = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&direction=desc&per_page=100`;
 
 module.exports = async function handler(request, response) {
   if (request.method === 'GET') {
@@ -24,7 +24,7 @@ module.exports = async function handler(request, response) {
 
       const repos = await githubResponse.json();
       const projects = repos
-        .filter(repo => !repo.fork && whitelist.includes(repo.name))
+        .filter(repo => whitelist.includes(repo.name))
         .sort((a, b) => {
           const oa = configs.find(c => c.repoName === a.name)?.displayOrder ?? 0;
           const ob = configs.find(c => c.repoName === b.name)?.displayOrder ?? 0;

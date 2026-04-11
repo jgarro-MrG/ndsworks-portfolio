@@ -5,15 +5,21 @@ import AdminLayout from '../../components/admin/AdminLayout';
 function ProjectsManager() {
   const [projects, setProjects] = useState([]);
   const [newRepo, setNewRepo] = useState({ repoName: '', imageUrl: '', displayOrder: 0 });
+  const [error, setError] = useState('');
 
   const load = () => axios.get('/api/admin/projects').then(r => setProjects(r.data));
   useEffect(() => { load(); }, []);
 
   const handleAdd = async (e) => {
     e.preventDefault();
-    await axios.post('/api/admin/projects', { ...newRepo, active: true });
-    setNewRepo({ repoName: '', imageUrl: '', displayOrder: 0 });
-    load();
+    setError('');
+    try {
+      await axios.post('/api/admin/projects', { ...newRepo, active: true });
+      setNewRepo({ repoName: '', imageUrl: '', displayOrder: 0 });
+      load();
+    } catch (err) {
+      setError(err.response?.data?.error || err.message || 'Failed to add project');
+    }
   };
 
   const toggleActive = async (p) => {
@@ -35,6 +41,8 @@ function ProjectsManager() {
   return (
     <AdminLayout>
       <h1 className="text-2xl font-bold mb-6">Projects</h1>
+
+      {error && <p className="mb-4 text-red-400 text-sm">{error}</p>}
 
       <form onSubmit={handleAdd} className="bg-slate-800 p-4 rounded-lg mb-6 flex gap-3 items-end flex-wrap">
         <div className="flex flex-col gap-1">
